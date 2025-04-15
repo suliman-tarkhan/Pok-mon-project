@@ -5,9 +5,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [more, setMore] = useState(false);
   const firstHalf = data.slice(0, 10);
-  const secendHalf = data.slice(10, 20);
-  console.log(firstHalf)
-  console.log(secendHalf)
+  const secondHalf = data.slice(10, 20);
   const fetchData = async () => {
     setLoading(true);
     try {
@@ -24,12 +22,12 @@ function App() {
   return (
     <div>
       <button onClick={fetchData} disabled={loading}>
-        {loading ? "loading" : "click  me "}
+        {loading ? "loading" : "Click  me "}
       </button>
       <button onClick={(  )=>{
         setMore(true)
       }} disabled={loading}>
-        {loading ? 'loading' : 'more '}
+        {loading ? 'loading' : 'More '}
       </button>
 
       {firstHalf && (
@@ -41,7 +39,7 @@ function App() {
       )}
       {more && (
         <ul>
-          {secendHalf.map((item, index) => (
+          {secondHalf.map((item, index) => (
             <li key={index}>{item.name}</li>
           ))}
         </ul>
