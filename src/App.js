@@ -1,31 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 function App() {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
-
+  const [more, setMore] = useState(false);
+  const firstHalf = data.slice(0, 10);
+  const secendHalf = data.slice(10, 20);
+  console.log(firstHalf)
+  console.log(secendHalf)
   const fetchData = async () => {
     setLoading(true);
     try {
-      const response = await fetch('https://pokeapi.co/api/v2/pokemon');
+      const response = await fetch("https://pokeapi.co/api/v2/pokemon");
       const result = await response.json();
       setData(result.results);
     } catch (error) {
-      console.error('error', error);
+      console.error("error", error);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div >
+    <div>
       <button onClick={fetchData} disabled={loading}>
-        {loading ? 'loading' : 'click  me '}
+        {loading ? "loading" : "click  me "}
+      </button>
+      <button onClick={(  )=>{
+        setMore(true)
+      }} disabled={loading}>
+        {loading ? 'loading' : 'more '}
       </button>
 
-      {data && (
-        <ul >
-          {data.map((item, index) => (
+      {firstHalf && (
+        <ul>
+          {firstHalf.map((item, index) => (
+            <li key={index}>{item.name}</li>
+          ))}
+        </ul>
+      )}
+      {more && (
+        <ul>
+          {secendHalf.map((item, index) => (
             <li key={index}>{item.name}</li>
           ))}
         </ul>
